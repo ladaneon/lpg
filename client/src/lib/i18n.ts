@@ -36,6 +36,7 @@ const translations = {
     'project.create.submit': 'Create Project',
     'project.create.creating': 'Creating...',
     'project.open': 'Open Project',
+    'project.noDate': 'No date available',
     
     // Editor Interface
     'editor.toolbar.newPage': 'New Page',
@@ -162,6 +163,7 @@ const translations = {
     'message.elementDeleted': 'The element has been removed from the page.',
     'message.stylesCopied': 'Element styles have been copied to clipboard.',
     'message.stylesPasted': 'Styles have been applied to the selected element.',
+    'message.projectDeleted': 'Project has been deleted successfully.',
     
     // Error Messages
     'error.createProject': 'Failed to create project. Please try again.',
@@ -169,6 +171,7 @@ const translations = {
     'error.exportProject': 'Failed to export your project. Please try again.',
     'error.applyTemplate': 'Failed to apply template. Please try again.',
     'error.loadProject': 'Loading project...',
+    'error.deleteProject': 'Failed to delete project. Please try again.',
     
     // Placeholders
     'placeholder.clickToEdit': 'Click to edit',
@@ -207,6 +210,7 @@ const translations = {
     'project.create.submit': 'Создать Проект',
     'project.create.creating': 'Создание...',
     'project.open': 'Открыть Проект',
+    'project.noDate': 'Дата недоступна',
     
     // Editor Interface
     'editor.toolbar.newPage': 'Новая Страница',
@@ -333,6 +337,7 @@ const translations = {
     'message.elementDeleted': 'Элемент был удален со страницы.',
     'message.stylesCopied': 'Стили элемента были скопированы в буфер обмена.',
     'message.stylesPasted': 'Стили были применены к выбранному элементу.',
+    'message.projectDeleted': 'Проект был успешно удален.',
     
     // Error Messages
     'error.createProject': 'Не удалось создать проект. Попробуйте еще раз.',
@@ -340,6 +345,7 @@ const translations = {
     'error.exportProject': 'Не удалось экспортировать проект. Попробуйте еще раз.',
     'error.applyTemplate': 'Не удалось применить шаблон. Попробуйте еще раз.',
     'error.loadProject': 'Загрузка проекта...',
+    'error.deleteProject': 'Не удалось удалить проект. Попробуйте еще раз.',
     
     // Placeholders
     'placeholder.clickToEdit': 'Нажмите для редактирования',
