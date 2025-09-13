@@ -211,20 +211,50 @@ export class DatabaseStorage implements IStorage {
 
   async createProject(insertProject: InsertProject): Promise<Project> {
     const result = await db.insert(projects).values(insertProject).returning();
-    return result[0];
+    
+    if (result && result.length > 0) {
+      return result[0];
+    }
+    
+    // Fallback: get the last created project by name
+    const fallbackResult = await db.select().from(projects)
+      .where(eq(projects.name, insertProject.name))
+      .orderBy(projects.createdAt)
+      .limit(1);
+    
+    if (fallbackResult.length === 0) {
+      throw new Error("Failed to create project");
+    }
+    
+    return fallbackResult[0];
   }
 
   async updateProject(id: string, updateData: Partial<InsertProject>): Promise<Project | undefined> {
+    const { sql } = await import("drizzle-orm");
     const result = await db.update(projects)
-      .set({ ...updateData, updatedAt: new Date() })
+      .set({ ...updateData, updatedAt: sql`now()` })
       .where(eq(projects.id, id))
       .returning();
     return result[0];
   }
 
   async deleteProject(id: string): Promise<boolean> {
-    const result = await db.delete(projects).where(eq(projects.id, id)).returning();
-    return result.length > 0;
+    try {
+      // First, check if project exists
+      const existingProject = await db.select().from(projects).where(eq(projects.id, id));
+      
+      if (existingProject.length === 0) {
+        return false;
+      }
+      
+      // Delete without returning() - just execute the delete
+      await db.delete(projects).where(eq(projects.id, id));
+      
+      return true;
+    } catch (error) {
+      console.error("Error in deleteProject:", error);
+      return false;
+    }
   }
 
   // Templates

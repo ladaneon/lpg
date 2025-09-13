@@ -49,6 +49,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const project = await storage.createProject(projectData);
       res.status(201).json(project);
     } catch (error) {
+      console.error("Error creating project:", error);
       res.status(400).json({ message: "Invalid project data" });
     }
   });
@@ -74,6 +75,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
       res.status(204).send();
     } catch (error) {
+      console.error("Error deleting project:", error);
       res.status(500).json({ message: "Failed to delete project" });
     }
   });

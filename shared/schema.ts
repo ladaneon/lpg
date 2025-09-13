@@ -11,8 +11,8 @@ export const projects = pgTable("projects", {
   elements: jsonb("elements").notNull().default('[]'),
   globalStyles: jsonb("global_styles").notNull().default('{}'),
   settings: jsonb("settings").notNull().default('{}'),
-  createdAt: timestamp("created_at").defaultNow(),
-  updatedAt: timestamp("updated_at").defaultNow(),
+  createdAt: timestamp("created_at", { mode: 'string' }).defaultNow(),
+  updatedAt: timestamp("updated_at", { mode: 'string' }).defaultNow(),
 });
 
 // Templates table for pre-built landing page templates
@@ -25,7 +25,7 @@ export const templates = pgTable("templates", {
   elements: jsonb("elements").notNull().default('[]'),
   globalStyles: jsonb("global_styles").notNull().default('{}'),
   isPremium: boolean("is_premium").default(false),
-  createdAt: timestamp("created_at").defaultNow(),
+  createdAt: timestamp("created_at", { mode: 'string' }).defaultNow(),
 });
 
 // Assets table for uploaded images and files
@@ -36,7 +36,7 @@ export const assets = pgTable("assets", {
   mimeType: text("mime_type").notNull(),
   size: text("size").notNull(),
   url: text("url").notNull(),
-  createdAt: timestamp("created_at").defaultNow(),
+  createdAt: timestamp("created_at", { mode: 'string' }).defaultNow(),
 });
 
 // Element schema for individual page elements
