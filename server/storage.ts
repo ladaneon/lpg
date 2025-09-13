@@ -308,4 +308,9 @@ export class MemStorage implements IStorage {
   }
 }
 
-export const storage = new MemStorage();
+import { DatabaseStorage } from "./database-storage";
+
+// Use database storage by default, memory storage only in test environment
+export const storage = process.env.NODE_ENV === 'test' 
+  ? new MemStorage() 
+  : new DatabaseStorage();
