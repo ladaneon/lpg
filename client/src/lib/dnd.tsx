@@ -390,10 +390,24 @@ export function getElementDefaults(type: string): Partial<Element> {
 
 export function validateElementType(type: string): boolean {
   const validTypes = [
-    'text', 'heading', 'image', 'button', 'video', 'spacer',
-    'section', 'gallery', 'contact-form', 'newsletter', 'map',
-    'social', 'testimonial', 'pricing', 'accordion', 'tabs', 'slider',
-    'row', 'column'
+    // Basic Elements
+    'text', 'heading', 'image', 'button', 'video', 'spacer', 'divider',
+    // Layout Elements  
+    'section', 'row', 'column', 'container', 'grid',
+    // Content Elements
+    'gallery', 'slider', 'carousel', 'hero', 'feature-box', 'icon-box',
+    'testimonial', 'review', 'stats', 'counter', 'progress-bar',
+    // Interactive Elements
+    'accordion', 'tabs', 'modal', 'tooltip', 'dropdown', 'search-box',
+    'rating', 'toggle', 'timeline',
+    // Form Elements
+    'contact-form', 'newsletter', 'input', 'textarea', 'select', 'checkbox',
+    'radio', 'file-upload',
+    // Business Elements
+    'pricing', 'pricing-table', 'team-member', 'service-card',
+    'product-card', 'blog-card',
+    // Utility Elements
+    'map', 'social', 'countdown', 'notification', 'alert', 'badge'
   ];
   
   return validTypes.includes(type);

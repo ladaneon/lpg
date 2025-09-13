@@ -43,9 +43,31 @@ export const assets = pgTable("assets", {
 export const elementSchema = z.object({
   id: z.string(),
   type: z.enum([
-    'text', 'heading', 'image', 'button', 'video', 'spacer', 
-    'section', 'gallery', 'contact-form', 'newsletter', 'map', 
-    'social', 'testimonial', 'pricing', 'accordion', 'tabs', 'slider'
+    // Basic Elements
+    'text', 'heading', 'image', 'button', 'video', 'spacer',
+    // Layout Elements  
+    'section', 'row', 'column', 'container', 'grid', 'flex',
+    // Content Elements
+    'gallery', 'slider', 'carousel', 'hero', 'feature-box', 'icon-box',
+    'testimonial', 'review', 'stats', 'counter', 'progress-bar',
+    // Interactive Elements
+    'accordion', 'tabs', 'modal', 'tooltip', 'dropdown', 'search-box',
+    'rating', 'toggle', 'switch', 'timeline',
+    // Form Elements
+    'contact-form', 'newsletter', 'input', 'textarea', 'select', 'checkbox',
+    'radio', 'file-upload', 'form-button', 'form-group',
+    // Navigation Elements
+    'navbar', 'menu', 'breadcrumb', 'pagination', 'sidebar',
+    // Media Elements
+    'audio', 'embed', 'iframe', 'code-block', 'syntax-highlight',
+    // Social & Communication
+    'social', 'share-buttons', 'comments', 'chat-widget', 'messenger',
+    // Business Elements
+    'pricing', 'pricing-table', 'team-member', 'about-card', 'service-card',
+    'product-card', 'blog-card', 'event-card', 'portfolio-item',
+    // Utility Elements
+    'map', 'weather-widget', 'calendar', 'clock', 'countdown',
+    'notification', 'alert', 'badge', 'label', 'divider', 'separator'
   ]),
   content: z.record(z.any()).default({}),
   styles: z.record(z.any()).default({}),

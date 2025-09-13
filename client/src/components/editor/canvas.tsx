@@ -13,6 +13,7 @@ import SpacerModule from "@/components/modules/spacer-module";
 import SectionModule from "@/components/modules/section-module";
 import GalleryModule from "@/components/modules/gallery-module";
 import ContactFormModule from "@/components/modules/contact-form-module";
+import FallbackModule from "@/components/modules/fallback-module";
 import type { Element } from "@shared/schema";
 
 function DropZone({ onDrop, className = "" }: { onDrop: (item: any) => void; className?: string }) {
@@ -74,17 +75,7 @@ function ElementRenderer({ element }: { element: Element }) {
     case 'contact-form':
       return <ContactFormModule {...commonProps} />;
     default:
-      return (
-        <div 
-          onClick={handleClick}
-          className="p-4 border border-border rounded bg-muted/50 cursor-pointer"
-          data-testid={`element-${element.type}-${element.id}`}
-        >
-          <p className="text-sm text-muted-foreground">
-            Unsupported element type: {element.type}
-          </p>
-        </div>
-      );
+      return <FallbackModule {...commonProps} />;
   }
 }
 
