@@ -117,18 +117,18 @@ export default function Home() {
       <header className="border-b border-border bg-card">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-4">
-              <div className="w-10 h-10 bg-gradient-to-br from-primary to-primary/80 rounded-xl flex items-center justify-center shadow-lg">
-                <FileText className="w-5 h-5 text-primary-foreground" />
+            <div className="flex items-center space-x-3">
+              <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+                <FileText className="w-4 h-4 text-primary-foreground" />
               </div>
-              <h1 className="text-2xl font-bold bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text text-transparent">{t('app.title')}</h1>
+              <h1 className="text-2xl font-bold text-foreground">{t('app.title')}</h1>
             </div>
             
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-3">
               <LanguageSwitcher />
               <Dialog open={isCreateModalOpen} onOpenChange={setIsCreateModalOpen}>
                 <DialogTrigger asChild>
-                  <Button className="bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary/80 shadow-lg hover:shadow-xl transition-all duration-200" data-testid="button-create-project">
+                  <Button data-testid="button-create-project">
                     <Plus className="w-4 h-4 mr-2" />
                     {t('home.createProject')}
                   </Button>
@@ -183,9 +183,9 @@ export default function Home() {
       </header>
 
       <main className="container mx-auto px-4 py-12">
-        <div className="mb-12 text-center">
-          <h2 className="text-4xl font-bold bg-gradient-to-r from-foreground via-foreground to-foreground/70 bg-clip-text text-transparent mb-4">{t('home.title')}</h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+        <div className="mb-8">
+          <h2 className="text-3xl font-bold text-foreground mb-2">{t('home.title')}</h2>
+          <p className="text-muted-foreground">
             {t('home.subtitle')}
           </p>
         </div>
