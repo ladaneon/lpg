@@ -33,31 +33,31 @@ function ModuleCard({ type, icon, label, category }: ModuleCardProps) {
   }));
 
   const categoryColors = {
-    basic: 'text-primary',
-    layout: 'text-secondary',
-    content: 'text-accent',
-    interactive: 'text-blue-500',
-    forms: 'text-destructive',
-    navigation: 'text-green-500',
-    media: 'text-purple-500',
-    social: 'text-pink-500',
-    business: 'text-orange-500',
-    utility: 'text-muted-foreground'
+    basic: 'text-[hsl(var(--cat-basic))]',
+    layout: 'text-[hsl(var(--cat-layout))]',
+    content: 'text-[hsl(var(--cat-content))]',
+    interactive: 'text-[hsl(var(--cat-interactive))]',
+    forms: 'text-[hsl(var(--cat-forms))]',
+    navigation: 'text-[hsl(var(--cat-content))]',
+    media: 'text-[hsl(var(--cat-interactive))]',
+    social: 'text-[hsl(var(--cat-business))]',
+    business: 'text-[hsl(var(--cat-business))]',
+    utility: 'text-[hsl(var(--cat-utility))]'
   };
 
   return (
     <div
       ref={drag}
-      className={`module-card p-3 bg-card border border-border rounded-lg cursor-pointer transition-all hover:shadow-md hover:-translate-y-0.5 ${
+      className={`module-card p-3 bg-card border border-border rounded-lg cursor-pointer transition-all hover:shadow-lg hover:-translate-y-1 hover:bg-[hsl(var(--primary))/0.03] hover:border-[hsl(var(--primary))/0.2] hover:ring-1 hover:ring-[hsl(var(--primary))/0.1] ${
         isDragging ? 'opacity-50' : ''
       }`}
       data-testid={`module-${type}`}
     >
       <div className="flex flex-col items-center space-y-2">
-        <div className={categoryColors[category]}>
+        <div className={`${categoryColors[category]} transition-all hover:scale-110`}>
           {icon}
         </div>
-        <span className="text-xs font-medium text-foreground text-center">{label}</span>
+        <span className="text-xs font-medium text-foreground text-center transition-all hover:text-[hsl(var(--primary))]">{label}</span>
       </div>
     </div>
   );
@@ -155,20 +155,20 @@ export default function ModulesSidebar() {
   );
 
   return (
-    <aside className="w-80 bg-muted/30 border-r border-border flex flex-col">
+    <aside className="w-80 bg-[hsl(var(--sidebar))] border-r border-[hsl(var(--sidebar-border))] flex flex-col shadow-sm">
       {/* Sidebar Header */}
-      <div className="p-4 border-b border-border">
-        <h2 className="text-lg font-semibold text-foreground mb-3">Elements</h2>
+      <div className="p-4 border-b border-[hsl(var(--sidebar-border))] bg-[hsl(var(--primary))/0.02]">
+        <h2 className="text-lg font-semibold text-[hsl(var(--sidebar-foreground))] mb-3">Elements</h2>
         <div className="relative">
           <Input
             type="text"
             placeholder="Search elements..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="pl-9"
+            className="pl-9 ring-1 ring-[hsl(var(--primary))/0.1] focus:ring-2 focus:ring-[hsl(var(--primary))/0.3] border-[hsl(var(--sidebar-border))]"
             data-testid="input-search-modules"
           />
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[hsl(var(--cat-utility))] w-4 h-4" />
         </div>
       </div>
       

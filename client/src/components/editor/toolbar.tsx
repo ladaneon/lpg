@@ -97,13 +97,13 @@ export default function Toolbar() {
   });
 
   return (
-    <header className="bg-card border-b border-border h-16 flex items-center justify-between px-4 shadow-sm">
+    <header className="bg-[hsl(var(--card))] border-b border-[hsl(var(--border))] h-16 flex items-center justify-between px-4 shadow-sm bg-[hsl(var(--primary))/0.02]">
       <div className="flex items-center space-x-4">
-        <Link href="/" className="flex items-center space-x-2 hover:opacity-80 transition-opacity">
-          <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-            <Box className="w-4 h-4 text-primary-foreground" />
+        <Link href="/" className="flex items-center space-x-2 hover:opacity-80 transition-all hover:scale-105">
+          <div className="w-8 h-8 bg-[hsl(var(--primary))] rounded-lg flex items-center justify-center shadow-md hover:shadow-lg transition-all">
+            <Box className="w-4 h-4 text-[hsl(var(--primary-foreground))]" />
           </div>
-          <h1 className="text-lg font-semibold text-foreground">PageBuilder Pro</h1>
+          <h1 className="text-lg font-semibold text-[hsl(var(--foreground))]">PageBuilder Pro</h1>
         </Link>
         
         <div className="flex items-center space-x-2 ml-8">
@@ -111,6 +111,7 @@ export default function Toolbar() {
             variant="secondary" 
             size="sm"
             onClick={() => setTemplateLibraryOpen(true)}
+            className="ring-1 ring-[hsl(var(--primary))/0.1] hover:ring-2 hover:ring-[hsl(var(--primary))/0.2] hover:bg-[hsl(var(--primary))/0.05]"
             data-testid="button-new-page"
           >
             <Plus className="w-4 h-4 mr-2" />
@@ -120,6 +121,7 @@ export default function Toolbar() {
             size="sm" 
             onClick={() => saveProjectMutation.mutate()}
             disabled={saveProjectMutation.isPending}
+            className="shadow-sm hover:shadow-md"
             data-testid="button-save"
           >
             <Save className="w-4 h-4 mr-2" />
@@ -129,11 +131,12 @@ export default function Toolbar() {
       </div>
       
       {/* Device Preview Controls */}
-      <div className="flex items-center space-x-2 bg-muted rounded-lg p-1">
+      <div className="flex items-center space-x-2 bg-[hsl(var(--muted))] rounded-lg p-1 ring-1 ring-[hsl(var(--primary))/0.1]">
         <Button
           variant={deviceView === "desktop" ? "default" : "ghost"}
           size="sm"
           onClick={() => setDeviceView("desktop")}
+          className={deviceView === "desktop" ? "shadow-sm" : "hover:bg-[hsl(var(--primary))/0.06]"}
           data-testid="button-desktop-view"
         >
           <Monitor className="w-4 h-4 mr-1" />
@@ -143,6 +146,7 @@ export default function Toolbar() {
           variant={deviceView === "tablet" ? "default" : "ghost"}
           size="sm" 
           onClick={() => setDeviceView("tablet")}
+          className={deviceView === "tablet" ? "shadow-sm" : "hover:bg-[hsl(var(--primary))/0.06]"}
           data-testid="button-tablet-view"
         >
           <Tablet className="w-4 h-4 mr-1" />
@@ -152,6 +156,7 @@ export default function Toolbar() {
           variant={deviceView === "mobile" ? "default" : "ghost"}
           size="sm"
           onClick={() => setDeviceView("mobile")}
+          className={deviceView === "mobile" ? "shadow-sm" : "hover:bg-[hsl(var(--primary))/0.06]"}
           data-testid="button-mobile-view"
         >
           <Smartphone className="w-4 h-4 mr-1" />
@@ -162,7 +167,7 @@ export default function Toolbar() {
       <div className="flex items-center space-x-4">
         {/* Version Control */}
         <div className="flex items-center space-x-2">
-          <span className="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full">
+          <span className="text-xs bg-[hsl(var(--cat-content))] text-white px-2 py-1 rounded-full font-medium shadow-sm">
             v1.0
           </span>
           <Button 
@@ -170,6 +175,7 @@ export default function Toolbar() {
             size="sm"
             disabled={!canUndo}
             onClick={undo}
+            className="hover:bg-[hsl(var(--primary))/0.1] disabled:opacity-50"
             data-testid="button-undo"
           >
             <Undo className="w-4 h-4" />
@@ -179,11 +185,17 @@ export default function Toolbar() {
             size="sm"
             disabled={!canRedo}
             onClick={redo}
+            className="hover:bg-[hsl(var(--primary))/0.1] disabled:opacity-50"
             data-testid="button-redo"
           >
             <Redo className="w-4 h-4" />
           </Button>
-          <Button variant="ghost" size="sm" data-testid="button-history">
+          <Button 
+            variant="ghost" 
+            size="sm" 
+            className="hover:bg-[hsl(var(--primary))/0.1]"
+            data-testid="button-history"
+          >
             <History className="w-4 h-4" />
           </Button>
         </div>
@@ -195,13 +207,14 @@ export default function Toolbar() {
             size="sm"
             onClick={() => exportMutation.mutate()}
             disabled={exportMutation.isPending}
+            className="ring-1 ring-[hsl(var(--primary))/0.2] hover:ring-2 hover:ring-[hsl(var(--primary))/0.3] hover:bg-[hsl(var(--primary))/0.05] shadow-sm"
             data-testid="button-export"
           >
             <Download className="w-4 h-4 mr-2" />
             {exportMutation.isPending ? "Exporting..." : "Export HTML"}
           </Button>
           <Button 
-            className="bg-accent hover:bg-accent/90 text-accent-foreground" 
+            className="bg-[hsl(var(--cat-forms))] hover:bg-[hsl(var(--cat-forms))/0.9] text-white shadow-md hover:shadow-lg transition-all" 
             size="sm"
             data-testid="button-publish"
           >
