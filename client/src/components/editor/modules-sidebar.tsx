@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useDrag } from "react-dnd";
+import { useTranslation } from "@/lib/i18n";
 import { 
   Search, Type, Heading1, Image, MousePointer, Video, MoveVertical,
   Square, Columns, GripHorizontal, Images, Sliders, Quote, Tag, List,
@@ -66,14 +67,15 @@ function ModuleCard({ type, icon, label, category }: ModuleCardProps) {
 export default function ModulesSidebar() {
   const [searchQuery, setSearchQuery] = useState("");
   const { setTemplateLibraryOpen } = useEditorStore();
+  const { t } = useTranslation();
 
   const basicModules = [
-    { type: 'text', icon: <Type className="w-5 h-5" />, label: 'Text' },
-    { type: 'heading', icon: <Heading1 className="w-5 h-5" />, label: 'Heading' },
-    { type: 'image', icon: <Image className="w-5 h-5" />, label: 'Image' },
-    { type: 'button', icon: <MousePointer className="w-5 h-5" />, label: 'Button' },
-    { type: 'video', icon: <Video className="w-5 h-5" />, label: 'Video' },
-    { type: 'spacer', icon: <MoveVertical className="w-5 h-5" />, label: 'Spacer' },
+    { type: 'text', icon: <Type className="w-5 h-5" />, label: t('element.text') },
+    { type: 'heading', icon: <Heading1 className="w-5 h-5" />, label: t('element.heading') },
+    { type: 'image', icon: <Image className="w-5 h-5" />, label: t('element.image') },
+    { type: 'button', icon: <MousePointer className="w-5 h-5" />, label: t('element.button') },
+    { type: 'video', icon: <Video className="w-5 h-5" />, label: t('element.video') },
+    { type: 'spacer', icon: <MoveVertical className="w-5 h-5" />, label: t('element.spacer') },
     { type: 'divider', icon: <Minus className="w-5 h-5" />, label: 'Divider' },
   ];
 
@@ -158,11 +160,11 @@ export default function ModulesSidebar() {
     <aside className="w-80 bg-[hsl(var(--sidebar))] border-r border-[hsl(var(--sidebar-border))] flex flex-col shadow-sm">
       {/* Sidebar Header */}
       <div className="p-4 border-b border-[hsl(var(--sidebar-border))] bg-[hsl(var(--primary))/0.02]">
-        <h2 className="text-lg font-semibold text-[hsl(var(--sidebar-foreground))] mb-3">Elements</h2>
+        <h2 className="text-lg font-semibold text-[hsl(var(--sidebar-foreground))] mb-3">{t('elements.title')}</h2>
         <div className="relative">
           <Input
             type="text"
-            placeholder="Search elements..."
+            placeholder={t('elements.search')}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="pl-9 ring-1 ring-[hsl(var(--primary))/0.1] focus:ring-2 focus:ring-[hsl(var(--primary))/0.3] border-[hsl(var(--sidebar-border))]"

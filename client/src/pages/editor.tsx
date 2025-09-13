@@ -8,11 +8,13 @@ import TemplateLibrary from "@/components/editor/template-library";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { useEditorStore } from "@/store/editor";
+import { useTranslation } from "@/lib/i18n";
 import { useEffect } from "react";
 import type { Project } from "@shared/schema";
 
 export default function Editor() {
   const { id } = useParams<{ id?: string }>();
+  const { t } = useTranslation();
   const { 
     setCurrentProject, 
     setElements, 
@@ -57,7 +59,7 @@ export default function Editor() {
       <div className="h-screen flex items-center justify-center bg-background">
         <div className="text-center">
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
-          <p className="text-muted-foreground">Loading project...</p>
+          <p className="text-muted-foreground">{t('error.loadProject')}</p>
         </div>
       </div>
     );

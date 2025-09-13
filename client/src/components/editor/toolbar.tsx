@@ -4,6 +4,7 @@ import { useEditorStore } from "@/store/editor";
 import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
+import { useTranslation } from "@/lib/i18n";
 import { generateHTMLExport } from "@/lib/export";
 import { 
   Box, 
@@ -37,6 +38,7 @@ export default function Toolbar() {
   } = useEditorStore();
   
   const { toast } = useToast();
+  const { t } = useTranslation();
 
   const saveProjectMutation = useMutation({
     mutationFn: async () => {
@@ -51,14 +53,14 @@ export default function Toolbar() {
     },
     onSuccess: () => {
       toast({
-        title: "Project saved",
-        description: "Your changes have been saved successfully.",
+        title: t('message.projectSaved'),
+        description: t('message.projectSaved'),
       });
     },
     onError: () => {
       toast({
-        title: "Save failed", 
-        description: "Failed to save your project. Please try again.",
+        title: "Error", 
+        description: t('error.saveProject'),
         variant: "destructive",
       });
     },
@@ -83,14 +85,14 @@ export default function Toolbar() {
     },
     onSuccess: () => {
       toast({
-        title: "Export successful",
-        description: "Your landing page has been exported as HTML.",
+        title: t('message.exportSuccess'),
+        description: t('message.exportSuccess'),
       });
     },
     onError: () => {
       toast({
-        title: "Export failed",
-        description: "Failed to export your project. Please try again.",
+        title: "Error",
+        description: t('error.exportProject'),
         variant: "destructive",
       });
     },
@@ -103,7 +105,7 @@ export default function Toolbar() {
           <div className="w-8 h-8 bg-[hsl(var(--primary))] rounded-lg flex items-center justify-center shadow-md hover:shadow-lg transition-all">
             <Box className="w-4 h-4 text-[hsl(var(--primary-foreground))]" />
           </div>
-          <h1 className="text-lg font-semibold text-[hsl(var(--foreground))]">PageBuilder Pro</h1>
+          <h1 className="text-lg font-semibold text-[hsl(var(--foreground))]">{t('app.title')}</h1>
         </Link>
         
         <div className="flex items-center space-x-2 ml-8">
@@ -115,7 +117,7 @@ export default function Toolbar() {
             data-testid="button-new-page"
           >
             <Plus className="w-4 h-4 mr-2" />
-            New Page
+            {t('editor.toolbar.newPage')}
           </Button>
           <Button 
             size="sm" 
@@ -125,7 +127,7 @@ export default function Toolbar() {
             data-testid="button-save"
           >
             <Save className="w-4 h-4 mr-2" />
-            {saveProjectMutation.isPending ? "Saving..." : "Save"}
+            {saveProjectMutation.isPending ? t('editor.toolbar.saving') : t('editor.toolbar.save')}
           </Button>
         </div>
       </div>
@@ -140,7 +142,7 @@ export default function Toolbar() {
           data-testid="button-desktop-view"
         >
           <Monitor className="w-4 h-4 mr-1" />
-          Desktop
+          {t('editor.toolbar.desktop')}
         </Button>
         <Button
           variant={deviceView === "tablet" ? "default" : "ghost"}
@@ -150,7 +152,7 @@ export default function Toolbar() {
           data-testid="button-tablet-view"
         >
           <Tablet className="w-4 h-4 mr-1" />
-          Tablet
+          {t('editor.toolbar.tablet')}
         </Button>
         <Button
           variant={deviceView === "mobile" ? "default" : "ghost"}
@@ -160,7 +162,7 @@ export default function Toolbar() {
           data-testid="button-mobile-view"
         >
           <Smartphone className="w-4 h-4 mr-1" />
-          Mobile
+          {t('editor.toolbar.mobile')}
         </Button>
       </div>
       
