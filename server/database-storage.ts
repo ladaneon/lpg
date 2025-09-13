@@ -8,8 +8,10 @@ export class DatabaseStorage implements IStorage {
   private templatesInitialized = false;
 
   constructor() {
-    // Initialize templates synchronously to ensure they're available
-    this.ensureTemplatesInitialized();
+    // Initialize templates asynchronously to prevent blocking app startup
+    this.ensureTemplatesInitialized().catch(error => {
+      console.error("Template initialization failed, continuing without pre-loaded templates:", error.message);
+    });
   }
 
   private async ensureTemplatesInitialized() {

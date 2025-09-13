@@ -6,5 +6,11 @@ if (!process.env.DATABASE_URL) {
   throw new Error("DATABASE_URL is not set");
 }
 
-const sql = neon(process.env.DATABASE_URL);
+// Configure the Neon client with SSL settings for Replit environment
+const sql = neon(process.env.DATABASE_URL, {
+  fetchOptions: {
+    cache: 'no-store',
+  },
+});
+
 export const db = drizzle(sql, { schema });
