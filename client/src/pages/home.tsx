@@ -113,22 +113,22 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
-      <header className="border-b border-border bg-card">
-        <div className="container mx-auto px-4 py-4">
+    <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/30">
+      <header className="border-b border-border/40 bg-card/80 backdrop-blur-md supports-[backdrop-filter]:bg-card/60">
+        <div className="container mx-auto px-4 py-6">
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-3">
-              <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-                <FileText className="w-4 h-4 text-primary-foreground" />
+            <div className="flex items-center space-x-4">
+              <div className="w-10 h-10 bg-gradient-to-br from-primary to-primary/80 rounded-xl flex items-center justify-center shadow-lg">
+                <FileText className="w-5 h-5 text-primary-foreground" />
               </div>
-              <h1 className="text-2xl font-bold text-foreground">{t('app.title')}</h1>
+              <h1 className="text-2xl font-bold bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text text-transparent">{t('app.title')}</h1>
             </div>
             
-            <div className="flex items-center space-x-3">
+            <div className="flex items-center space-x-4">
               <LanguageSwitcher />
               <Dialog open={isCreateModalOpen} onOpenChange={setIsCreateModalOpen}>
                 <DialogTrigger asChild>
-                  <Button data-testid="button-create-project">
+                  <Button className="bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary/80 shadow-lg hover:shadow-xl transition-all duration-200" data-testid="button-create-project">
                     <Plus className="w-4 h-4 mr-2" />
                     {t('home.createProject')}
                   </Button>
@@ -182,10 +182,10 @@ export default function Home() {
         </div>
       </header>
 
-      <main className="container mx-auto px-4 py-8">
-        <div className="mb-8">
-          <h2 className="text-3xl font-bold text-foreground mb-2">{t('home.title')}</h2>
-          <p className="text-muted-foreground">
+      <main className="container mx-auto px-4 py-12">
+        <div className="mb-12 text-center">
+          <h2 className="text-4xl font-bold bg-gradient-to-r from-foreground via-foreground to-foreground/70 bg-clip-text text-transparent mb-4">{t('home.title')}</h2>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
             {t('home.subtitle')}
           </p>
         </div>
@@ -193,14 +193,14 @@ export default function Home() {
         {isLoading ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[...Array(6)].map((_, i) => (
-              <Card key={i} className="animate-pulse">
-                <CardHeader>
-                  <div className="h-4 bg-muted rounded w-3/4 mb-2"></div>
-                  <div className="h-3 bg-muted rounded w-1/2"></div>
+              <Card key={i} className="animate-pulse border-border/30 bg-card/30">
+                <CardHeader className="pb-3">
+                  <div className="h-5 bg-gradient-to-r from-muted to-muted/50 rounded-lg w-3/4 mb-3"></div>
+                  <div className="h-3 bg-gradient-to-r from-muted to-muted/50 rounded w-1/2"></div>
                 </CardHeader>
-                <CardContent>
-                  <div className="h-20 bg-muted rounded mb-4"></div>
-                  <div className="h-8 bg-muted rounded w-24"></div>
+                <CardContent className="pt-3">
+                  <div className="h-4 bg-gradient-to-r from-muted to-muted/50 rounded mb-6 w-20"></div>
+                  <div className="h-10 bg-gradient-to-r from-muted to-muted/50 rounded-lg"></div>
                 </CardContent>
               </Card>
             ))}
@@ -208,24 +208,25 @@ export default function Home() {
         ) : projects && projects.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {projects.map((project) => (
-              <Card key={project.id} className="hover:shadow-lg transition-shadow">
-                <CardHeader>
+              <Card key={project.id} className="group hover:shadow-2xl hover:shadow-primary/10 transition-all duration-300 hover:-translate-y-1 border-border/50 bg-card/50 backdrop-blur-sm">
+                <CardHeader className="pb-3">
                   <CardTitle className="flex items-center justify-between">
-                    <span data-testid={`text-project-name-${project.id}`}>{project.name}</span>
-                    <div className="flex items-center space-x-1">
+                    <span data-testid={`text-project-name-${project.id}`} className="group-hover:text-primary transition-colors">{project.name}</span>
+                    <div className="flex items-center space-x-1 opacity-0 group-hover:opacity-100 transition-opacity">
                       <Link href={`/editor/${project.id}`}>
-                        <Button variant="ghost" size="sm" data-testid={`button-edit-${project.id}`}>
+                        <Button variant="ghost" size="sm" className="hover:bg-primary/10 hover:text-primary" data-testid={`button-edit-${project.id}`}>
                           <ExternalLink className="w-4 h-4" />
                         </Button>
                       </Link>
                       <Button 
                         variant="ghost" 
                         size="sm" 
+                        className="hover:bg-destructive/10 hover:text-destructive"
                         data-testid={`button-delete-${project.id}`}
                         onClick={() => deleteProjectMutation.mutate(project.id)}
                         disabled={deleteProjectMutation.isPending}
                       >
-                        <Trash2 className="w-4 h-4 text-destructive" />
+                        <Trash2 className="w-4 h-4" />
                       </Button>
                     </div>
                   </CardTitle>
@@ -235,8 +236,8 @@ export default function Home() {
                     </CardDescription>
                   )}
                 </CardHeader>
-                <CardContent>
-                  <div className="flex items-center text-sm text-muted-foreground mb-4">
+                <CardContent className="pt-3">
+                  <div className="flex items-center text-sm text-muted-foreground mb-6">
                     <Calendar className="w-4 h-4 mr-2" />
                     <span data-testid={`text-project-date-${project.id}`}>
                       {project.updatedAt || project.createdAt 
@@ -246,7 +247,7 @@ export default function Home() {
                     </span>
                   </div>
                   <Link href={`/editor/${project.id}`}>
-                    <Button className="w-full" data-testid={`button-open-${project.id}`}>
+                    <Button className="w-full bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary/80 shadow-md hover:shadow-lg transition-all duration-200" data-testid={`button-open-${project.id}`}>
                       {t('project.open')}
                     </Button>
                   </Link>
@@ -255,18 +256,18 @@ export default function Home() {
             ))}
           </div>
         ) : (
-          <div className="text-center py-12">
-            <div className="w-24 h-24 bg-muted rounded-full flex items-center justify-center mx-auto mb-4">
-              <FileText className="w-12 h-12 text-muted-foreground" />
+          <div className="text-center py-20">
+            <div className="w-32 h-32 bg-gradient-to-br from-muted to-muted/50 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">
+              <FileText className="w-16 h-16 text-muted-foreground/70" />
             </div>
-            <h3 className="text-xl font-semibold text-foreground mb-2">{t('home.noProjects.title')}</h3>
-            <p className="text-muted-foreground mb-6 max-w-md mx-auto">
+            <h3 className="text-2xl font-semibold bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text text-transparent mb-3">{t('home.noProjects.title')}</h3>
+            <p className="text-muted-foreground mb-8 max-w-lg mx-auto text-lg leading-relaxed">
               {t('home.noProjects.description')}
             </p>
             <Dialog open={isCreateModalOpen} onOpenChange={setIsCreateModalOpen}>
               <DialogTrigger asChild>
-                <Button size="lg" data-testid="button-create-first-project">
-                  <Plus className="w-4 h-4 mr-2" />
+                <Button size="lg" className="bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary/80 shadow-lg hover:shadow-xl transition-all duration-200 px-8 py-3" data-testid="button-create-first-project">
+                  <Plus className="w-5 h-5 mr-2" />
                   {t('home.createFirstProject')}
                 </Button>
               </DialogTrigger>
