@@ -200,7 +200,13 @@ export class DatabaseStorage implements IStorage {
   }
 
   async getProjects(): Promise<Project[]> {
-    return await db.select().from(projects).orderBy(projects.updatedAt);
+    try {
+      return await db.select().from(projects).orderBy(projects.createdAt);
+    } catch (error) {
+      console.error("Error getting projects:", error);
+      // Fallback without ordering if orderBy fails
+      return await db.select().from(projects);
+    }
   }
 
   async createProject(insertProject: InsertProject): Promise<Project> {
