@@ -184,6 +184,7 @@ const translations = {
     // Loading States
     'loading.projects': 'Loading projects...',
     'loading.templates': 'Loading templates...',
+    'loading.project': 'Loading project...',
   },
   ru: {
     // Header & Navigation
@@ -358,6 +359,7 @@ const translations = {
     // Loading States
     'loading.projects': 'Загрузка проектов...',
     'loading.templates': 'Загрузка шаблонов...',
+    'loading.project': 'Загрузка проекта...',
   }
 };
 

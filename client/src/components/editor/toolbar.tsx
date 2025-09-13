@@ -213,7 +213,7 @@ export default function Toolbar() {
             data-testid="button-export"
           >
             <Download className="w-4 h-4 mr-2" />
-            {exportMutation.isPending ? "Exporting..." : "Export HTML"}
+            {exportMutation.isPending ? t('editor.toolbar.exporting') : t('editor.toolbar.export')}
           </Button>
           <Button 
             className="bg-[hsl(var(--cat-forms))] hover:bg-[hsl(var(--cat-forms))/0.9] text-white shadow-md hover:shadow-lg transition-all" 
@@ -221,7 +221,7 @@ export default function Toolbar() {
             data-testid="button-publish"
           >
             <Rocket className="w-4 h-4 mr-2" />
-            Publish
+            {t('editor.toolbar.publish')}
           </Button>
         </div>
       </div>
