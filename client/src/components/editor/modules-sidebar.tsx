@@ -157,20 +157,20 @@ export default function ModulesSidebar() {
   );
 
   return (
-    <aside className="w-80 bg-[hsl(var(--sidebar))] border-r border-[hsl(var(--sidebar-border))] flex flex-col shadow-sm">
+    <aside className="w-80 bg-[hsl(var(--sidebar))]/80 backdrop-blur-sm border-r border-[hsl(var(--sidebar-border))]/50 flex flex-col shadow-lg">
       {/* Sidebar Header */}
-      <div className="p-4 border-b border-[hsl(var(--sidebar-border))] bg-[hsl(var(--primary))/0.02]">
-        <h2 className="text-lg font-semibold text-[hsl(var(--sidebar-foreground))] mb-3">{t('elements.title')}</h2>
+      <div className="p-6 border-b border-[hsl(var(--sidebar-border))]/50 bg-gradient-to-r from-[hsl(var(--primary))]/0.03 to-transparent">
+        <h2 className="text-xl font-bold bg-gradient-to-r from-[hsl(var(--sidebar-foreground))] to-[hsl(var(--sidebar-foreground))]/70 bg-clip-text text-transparent mb-4">{t('elements.title')}</h2>
         <div className="relative">
           <Input
             type="text"
             placeholder={t('elements.search')}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="pl-9 ring-1 ring-[hsl(var(--primary))/0.1] focus:ring-2 focus:ring-[hsl(var(--primary))/0.3] border-[hsl(var(--sidebar-border))]"
+            className="pl-10 ring-1 ring-[hsl(var(--primary))/0.2] focus:ring-2 focus:ring-[hsl(var(--primary))]/40 border-[hsl(var(--sidebar-border))]/50 bg-card/50 backdrop-blur-sm shadow-sm"
             data-testid="input-search-modules"
           />
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[hsl(var(--cat-utility))] w-4 h-4" />
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[hsl(var(--primary))]/60 w-4 h-4" />
         </div>
       </div>
       
