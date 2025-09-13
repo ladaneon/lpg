@@ -56,13 +56,10 @@ export default function Editor() {
 
   if (isLoading) {
     return (
-      <div className="h-screen flex items-center justify-center bg-gradient-to-br from-background via-background to-muted/20">
+      <div className="h-screen flex items-center justify-center bg-background">
         <div className="text-center">
-          <div className="relative">
-            <div className="animate-spin rounded-full h-12 w-12 border-4 border-muted border-t-primary mx-auto mb-6"></div>
-            <div className="absolute inset-0 rounded-full bg-gradient-to-r from-primary/20 to-transparent animate-pulse"></div>
-          </div>
-          <p className="text-lg text-muted-foreground">{t('loading.project')}</p>
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
+          <p className="text-muted-foreground">{t('loading.project')}</p>
         </div>
       </div>
     );
@@ -70,12 +67,12 @@ export default function Editor() {
 
   return (
     <DndProvider backend={HTML5Backend}>
-      <div className="h-screen flex flex-col bg-gradient-to-br from-background via-background to-muted/20">
+      <div className="h-screen flex flex-col bg-background">
         <Toolbar />
         
-        <div className="flex-1 flex overflow-hidden gap-1">
+        <div className="flex-1 flex overflow-hidden">
           <ModulesSidebar />
-          <div className="flex-1 bg-card/30 border border-border/50 rounded-lg shadow-lg backdrop-blur-sm">
+          <div className="flex-1 bg-card border border-border">
             <Canvas />
           </div>
           <PropertiesSidebar />

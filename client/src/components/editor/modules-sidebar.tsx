@@ -157,9 +157,9 @@ export default function ModulesSidebar() {
   );
 
   return (
-    <aside className="w-80 bg-[hsl(var(--sidebar))]/80 backdrop-blur-sm border-r border-[hsl(var(--sidebar-border))]/50 flex flex-col shadow-lg">
+    <aside className="w-80 bg-card border-r border-border flex flex-col shadow-sm">
       {/* Sidebar Header */}
-      <div className="p-6 border-b border-[hsl(var(--sidebar-border))]/50 bg-gradient-to-r from-[hsl(var(--primary))]/0.03 to-transparent">
+      <div className="p-4 border-b border-border">
         <h2 className="text-xl font-bold bg-gradient-to-r from-[hsl(var(--sidebar-foreground))] to-[hsl(var(--sidebar-foreground))]/70 bg-clip-text text-transparent mb-4">{t('elements.title')}</h2>
         <div className="relative">
           <Input

@@ -99,7 +99,7 @@ export default function Toolbar() {
   });
 
   return (
-    <header className="bg-[hsl(var(--card))] border-b border-[hsl(var(--border))] h-16 flex items-center justify-between px-4 shadow-sm bg-[hsl(var(--primary))/0.02]">
+    <header className="bg-card border-b border-border h-16 flex items-center justify-between px-4 shadow-sm">
       <div className="flex items-center space-x-4">
         <Link href="/" className="flex items-center space-x-2 hover:opacity-80 transition-all hover:scale-105">
           <div className="w-8 h-8 bg-[hsl(var(--primary))] rounded-lg flex items-center justify-center shadow-md hover:shadow-lg transition-all">
