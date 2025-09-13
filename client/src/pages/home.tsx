@@ -10,7 +10,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { queryClient } from "@/lib/queryClient";
 import { apiRequest } from "@/lib/queryClient";
-import { Plus, FileText, Calendar, ExternalLink } from "lucide-react";
+import { Plus, FileText, Calendar, ExternalLink, Trash2 } from "lucide-react";
 import { useTranslation } from "@/lib/i18n";
 import { LanguageSwitcher } from "@/components/ui/language-switcher";
 import type { Project } from "@shared/schema";
@@ -81,6 +81,26 @@ export default function Home() {
       toast({
         title: "Error",
         description: t('error.createProject'),
+        variant: "destructive",
+      });
+    },
+  });
+
+  const deleteProjectMutation = useMutation({
+    mutationFn: async (projectId: string) => {
+      await apiRequest("DELETE", `/api/projects/${projectId}`);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/projects"] });
+      toast({
+        title: t('message.projectDeleted'),
+        description: t('message.projectDeleted'),
+      });
+    },
+    onError: () => {
+      toast({
+        title: "Error",
+        description: t('error.deleteProject'),
         variant: "destructive",
       });
     },
@@ -192,11 +212,22 @@ export default function Home() {
                 <CardHeader>
                   <CardTitle className="flex items-center justify-between">
                     <span data-testid={`text-project-name-${project.id}`}>{project.name}</span>
-                    <Link href={`/editor/${project.id}`}>
-                      <Button variant="ghost" size="sm" data-testid={`button-edit-${project.id}`}>
-                        <ExternalLink className="w-4 h-4" />
+                    <div className="flex items-center space-x-1">
+                      <Link href={`/editor/${project.id}`}>
+                        <Button variant="ghost" size="sm" data-testid={`button-edit-${project.id}`}>
+                          <ExternalLink className="w-4 h-4" />
+                        </Button>
+                      </Link>
+                      <Button 
+                        variant="ghost" 
+                        size="sm" 
+                        data-testid={`button-delete-${project.id}`}
+                        onClick={() => deleteProjectMutation.mutate(project.id)}
+                        disabled={deleteProjectMutation.isPending}
+                      >
+                        <Trash2 className="w-4 h-4 text-destructive" />
                       </Button>
-                    </Link>
+                    </div>
                   </CardTitle>
                   {project.description && (
                     <CardDescription data-testid={`text-project-description-${project.id}`}>
@@ -208,7 +239,10 @@ export default function Home() {
                   <div className="flex items-center text-sm text-muted-foreground mb-4">
                     <Calendar className="w-4 h-4 mr-2" />
                     <span data-testid={`text-project-date-${project.id}`}>
-                      {new Date(project.updatedAt || project.createdAt || '').toLocaleDateString()}
+                      {project.updatedAt || project.createdAt 
+                        ? new Date(project.updatedAt || project.createdAt!).toLocaleDateString()
+                        : t('project.noDate')
+                      }
                     </span>
                   </div>
                   <Link href={`/editor/${project.id}`}>
